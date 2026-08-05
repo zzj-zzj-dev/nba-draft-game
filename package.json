@@ -1,0 +1,14 @@
+{
+  "name": "nba-draft-game",
+  "version": "1.0.0",
+  "description": "1v1 NBA 阵容对决联机游戏（服务器权威模式）",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
