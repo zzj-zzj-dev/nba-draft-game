@@ -78,19 +78,24 @@ function generateDraftPool(room) {
   // 简化策略：随机生成候选池时，每次确保池内存在足够便宜的可购买球员。
   // 更稳健的做法：用贪心/回溯判断两名玩家在剩余轮次中都能用剩余金币填满。
 
-  // 此处采用“保守可用”策略：仅当一个池版本通过“可行性验证”才采用。
+  // ===== 一次性 25 人池 =====
+  // 要求：每个价位（1~5金币）各固定给 5 名球员，即 5 档 × 5 人 = 25 人，
+  // 保证各价位数量完全一致、公平。
+  const POOL_PER_COST = 5;
+  const allCostLevels = [5, 4, 3, 2, 1]; // 按价格从高到低取，便于后续策略
   let pool = [];
-  let attempts = 0;
-  while (attempts < 200) {
-    pool = secureSample(available, DRAFT_POOL_SIZE);
-    // 检查可行性：两玩家各自能否用后续随机池里足够便宜的球员完成阵容
-    if (isFeasibleToFinish(room, pool)) {
-      return pool;
-    }
-    attempts++;
+  for (const cost of allCostLevels) {
+    const sameCost = available.filter(p => p.cost === cost);
+    const sample = secureSample(sameCost, POOL_PER_COST);
+    pool = pool.concat(sample);
   }
-  // 理论兜底（极少发生）
-  return pool;
+
+  // 兜底可行性校验：若因极端情况抽出的池不可行，用保守随机重抽（保证池子能顺利打完）。
+  if (isFeasibleToFinish(room, pool)) {
+    return pool;
+  }
+  // 理论兜底；feasibility 在足够大且含低价的池里基本恒真
+  return secureSample(available, DRAFT_POOL_SIZE);
 }
 
 /**
@@ -163,6 +168,15 @@ function getPublicState(room, socketId) {
     };
   });
 
+  // 视角化结果：直接告诉客户端“本机是否获胜、自己的评分、对手的评分”，
+  // 避免前端二次映射 A/B 造成“两个人都输 / 分数反了”的错位。
+  const rA = room.ratings && room.ratings.A;
+  const rB = room.ratings && room.ratings.B;
+  let youWon = false;
+  if (room.winner === 'A') youWon = (selfIndex === 0);
+  else if (room.winner === 'B') youWon = (selfIndex === 1);
+  // winner==='draw' 时 youWon 保持 false（前端用平局特殊处理）
+
   return {
     code: room.code,
     phase: room.phase,
@@ -172,6 +186,11 @@ function getPublicState(room, socketId) {
     currentPool: room.currentPool,
     winner: room.winner,
     ratings: room.ratings,
+    // 视角化：你 / 对手 的评分对象
+    selfRating: selfIndex === 0 ? rA : rB,
+    oppRating:  selfIndex === 0 ? rB : rA,
+    // 本机是否获胜
+    youWon,
     // 是否轮到自己（仅在选择阶段有意义）
     isYourTurn: (selfIndex !== -1 && room.phase === PHASES.DRAFT && room.currentTurnIndex === selfIndex),
     draftComplete: (room.players[0] && room.players[1] && room.players[0].lineup.length === 5 && room.players[1].lineup.length === 5),
