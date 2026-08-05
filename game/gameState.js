@@ -16,8 +16,10 @@ const PHASES = {
 
 // 每个玩家初始金币
 const START_COINS = 15;
-// 总候选人规模（每轮 5）
-const DRAFT_POOL_SIZE = 5;
+// 待选总池规模（一次性给出，两玩家轮流选，被选的移除）
+const DRAFT_POOL_SIZE = 25;
+// 每名玩家最终挑选人数
+const ROSTER_SIZE = 5;
 
 const rooms = new Map(); // roomId -> roomState
 
@@ -180,6 +182,7 @@ module.exports = {
   PHASES,
   START_COINS,
   DRAFT_POOL_SIZE,
+  ROSTER_SIZE,
   rooms,
   createRoom,
   findRoomByCode,
