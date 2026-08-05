@@ -37,6 +37,20 @@ io.on('connection', (socket) => {
   // ---- 创建房间 ----
   socket.on('createRoom', (playerName, cb) => {
     try {
+      // 幂等：若该 socket 此前已属于某个「等待中」的房间并占着玩家位，
+      // 先清理掉旧占位，避免同一 socket 多次创建/重建残留“假已满”。
+      const prevRoomCode = socketRoomMap.get(socket.id);
+      if (prevRoomCode) {
+        const prevRoom = gameState.rooms.get(prevRoomCode);
+        if (prevRoom && prevRoom.phase === gameState.PHASES.WAITING) {
+          const idx = findPlayerIndex(prevRoom, socket.id);
+          if (idx !== -1 && !prevRoom.players[1-idx]) {
+            // 旧房间没有对手加入时，才清理本位的占位
+            prevRoom.players[idx] = null;
+          }
+        }
+      }
+
       const hostPlayer = {
         socketId: socket.id,
         name: playerName || '玩家A',
@@ -75,18 +89,23 @@ io.on('connection', (socket) => {
         return respond(cb, { ok: false, error: '你已经在房间中' });
       }
 
-      const guestPlayer = {
+      // 寻找可用的玩家位：若 players[0]（主机位）为空则优先补上，否则用 players[1]。
+      // 这样即使创建者断线离开，房间也能被新加入者正常接管，不会出现“空主机”畸形态。
+      const slotIndex = (room.players[0] == null) ? 0 : 1;
+      const newPlayer = {
         socketId: socket.id,
         name: name || '玩家B',
         remainingCoins: gameState.START_COINS,
         lineup: [],
       };
-      room.players[1] = guestPlayer;
+      room.players[slotIndex] = newPlayer;
       socket.join(room.code);
       socketRoomMap.set(socket.id, room.code);
 
-      // 房间满 2 人 -> 开始选人
-      draft.startDraft(room);
+      // 两个有效玩家位都就位 -> 开始选人
+      if (room.players[0] && room.players[1]) {
+        draft.startDraft(room);
+      }
 
       respond(cb, { ok: true, code: room.code });
       emitRoomState(room.code);
@@ -102,6 +121,34 @@ io.on('connection', (socket) => {
       const roomCode = (code || '').toString().trim().toUpperCase();
       const room = gameState.findRoomByCode(roomCode);
       if (!room) return respond(cb, { ok: false, error: '房间不存在' });
+
+      // 1) 优先接回：找到该房间中标记为“已断线”的玩家位，把新的 socketId 接回该位置。
+      let claimed = false;
+      for (let i = 0; i < 2; i++) {
+        const p = room.players[i];
+        if (p && p.disconnected) {
+          p.socketId = socket.id;
+          p.disconnected = false;
+          claimed = true;
+          break;
+        }
+      }
+      // 2) 若没有已断线占位，但房间仍在「等待加入」且有玩家空位，则把新 socket 占一个空位，
+      //    使“创建者刷新后重新进入”也能恢复身份。
+      if (!claimed && room.phase === gameState.PHASES.WAITING) {
+        for (let i = 0; i < 2; i++) {
+          if (room.players[i] == null) {
+            room.players[i] = {
+              socketId: socket.id,
+              name: (i === 0 ? '玩家A' : '玩家B'),
+              remainingCoins: gameState.START_COINS,
+              lineup: [],
+            };
+            claimed = true;
+            break;
+          }
+        }
+      }
       socket.join(room.code);
       socketRoomMap.set(socket.id, room.code);
       respond(cb, { ok: true, code: room.code });
@@ -221,12 +268,21 @@ io.on('connection', (socket) => {
     const room = gameState.rooms.get(roomCode);
     if (!room) return;
 
-    // 标记断线方（保留房间，等待重连）
-    if (room.players[0] && room.players[0].socketId === socket.id) {
-      room.players[0].disconnected = true;
-    }
-    if (room.players[1] && room.players[1].socketId === socket.id) {
-      room.players[1].disconnected = true;
+    // 若仍在「等待加入」阶段：彻底释放该玩家位，避免“假已满”/占位残留。
+    // 创建者(A)刷新页面或重连时，其旧占位会被清空，其他人可正常加入。
+    if (room.phase === gameState.PHASES.WAITING) {
+      const idx = findPlayerIndex(room, socket.id);
+      if (idx !== -1) {
+        room.players[idx] = null;
+      }
+    } else {
+      // 对局中：标记断线，等待重连
+      if (room.players[0] && room.players[0].socketId === socket.id) {
+        room.players[0].disconnected = true;
+      }
+      if (room.players[1] && room.players[1].socketId === socket.id) {
+        room.players[1].disconnected = true;
+      }
     }
     socketRoomMap.delete(socket.id);
     emitRoomState(room.code);
