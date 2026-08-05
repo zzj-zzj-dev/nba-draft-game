@@ -1,0 +1,13 @@
+# Render 声明式部署配置（免费 Web 服务够用）
+# 部署方式见 README.md
+services:
+  - type: web
+    name: nba-draft-game
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
