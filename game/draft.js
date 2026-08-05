@@ -2,8 +2,10 @@
  * 选人阶段逻辑 —— 服务器权威
  */
 
-const { generateDraftPool, PHASES, START_COINS, isPlayerTaken } = require('./gameState');
+const { generateDraftPool, PHASES, START_COINS, isPlayerTaken, ROSTER_SIZE } = require('./gameState');
 const playersDB = require('../data/players');
+
+// ROSTER_SIZE：每名玩家需选满的人数（=5），与 gameState 保持一致，避免硬编码漂移。
 
 /**
  * 开始选人阶段：由 createRoom 在第二位玩家加入且房间人数达到 2 时调用。
@@ -70,7 +72,7 @@ function handleSelect(room, playerIndex, playerId) {
   }
 
   // 校验5：玩家阵容是否已满
-  if (player.lineup.length >= 5) {
+  if (player.lineup.length >= ROSTER_SIZE) {
     return { success: false, error: '阵容已满' };
   }
 
@@ -79,7 +81,7 @@ function handleSelect(room, playerIndex, playerId) {
   // 每名球员至少要 1 金币，因此剩余金币必须 >= needAfter，
   // 否则玩家将无法凑齐 5 人，绝对不允许发生。
   const newRemaining = player.remainingCoins - target.cost;
-  const needAfter = Math.max(0, 5 - (player.lineup.length + 1));
+  const needAfter = Math.max(0, ROSTER_SIZE - (player.lineup.length + 1));
   if (newRemaining < needAfter) {
     return {
       success: false,
@@ -110,8 +112,8 @@ function handleSelect(room, playerIndex, playerId) {
 function advanceTurn(room) {
   const p0 = room.players[0];
   const p1 = room.players[1];
-  const done0 = p0.lineup.length >= 5;
-  const done1 = p1.lineup.length >= 5;
+  const done0 = p0.lineup.length >= ROSTER_SIZE;
+  const done1 = p1.lineup.length >= ROSTER_SIZE;
 
   // 双方都完成 -> 进入阵容调整阶段
   if (done0 && done1) {
@@ -130,8 +132,8 @@ function advanceTurn(room) {
     room.currentTurnIndex = room.currentTurnIndex === 0 ? 1 : 0;
   }
 
-  // 切换回合后重新生成候选池（下一轮的 5 名球员）
-  regeneratePool(room);
+  // 25人一次性候选池固定不变，已经选择的球员在 handleSelect 中已从池中移除，
+  // 因此这里不再重新生成候选池。
 }
 
 // 供调试/重建使用
