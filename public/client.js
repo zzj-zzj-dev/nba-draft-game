@@ -195,24 +195,47 @@ function renderDraftPool(pool, isMyTurn, myCoins) {
   const myLineupCount = my ? my.lineupCount : 0;
   const needMore = 5 - myLineupCount; // 我还能选几个（用于提前判断）
 
+  // 按价格分组：1~5 金币，各成一排，方便移动端一眼看全、按档位挑选。
+  const COST_LEVELS = [1, 2, 3, 4, 5];
+  const groups = {};
+  COST_LEVELS.forEach(c => groups[c] = []);
   pool.forEach(player => {
-    const unaffordable = player.cost > myCoins;
-    const canSelect = isMyTurn && !unaffordable && needMore > 0;
-    const card = createPlayerCard(player, {
-      selectable: true,
-      disabled: !canSelect,
-      unaffordable,
-      onSelect: () => {
-        if (!isMyTurn) return toast('还没轮到你选择');
-        if (player.cost > myCoins) return toast('金币不足');
-        if (needMore <= 0) return toast('你的阵容已满');
-        debounceAction(() => socket.emit('selectPlayer', player.id, (res) => {
-          if (!res.ok) toast(res.error);
-          else toast(`你选择了 ${player.name}`);
-        }));
-      },
+    const c = player.cost;
+    if (groups[c]) groups[c].push(player);
+  });
+
+  COST_LEVELS.forEach(cost => {
+    const list = groups[cost];
+    if (!list || !list.length) return;
+    const row = document.createElement('div');
+    row.className = 'draft-cost-row';
+    const label = document.createElement('div');
+    label.className = 'draft-cost-label';
+    label.textContent = `${cost} 金币`;
+    row.appendChild(label);
+    const cardsWrap = document.createElement('div');
+    cardsWrap.className = 'draft-cost-cards';
+    list.forEach(player => {
+      const unaffordable = player.cost > myCoins;
+      const canSelect = isMyTurn && player.cost <= myCoins && needMore > 0;
+      const card = createPlayerCard(player, {
+        selectable: true,
+        disabled: !canSelect,
+        unaffordable,
+        onSelect: () => {
+          if (!isMyTurn) return toast('还没轮到你选择');
+          if (player.cost > myCoins) return toast('金币不足');
+          if (needMore <= 0) return toast('你的阵容已满');
+          debounceAction(() => socket.emit('selectPlayer', player.id, (res) => {
+            if (!res.ok) toast(res.error);
+            else toast(`你选择了 ${player.name}`);
+          }));
+        },
+      });
+      cardsWrap.appendChild(card);
     });
-    container.appendChild(card);
+    row.appendChild(cardsWrap);
+    container.appendChild(row);
   });
 
   const note = $('draftNote');
@@ -377,8 +400,13 @@ function renderResult(state) {
 
   const selfPanel = $('resultSelf');
   const oppPanel = $('resultOpp');
-  renderPlayerResult(selfPanel, self, opp, ratings.A, '你', selfWon, ratings.B);
-  renderPlayerResult(oppPanel, opp, self, ratings.B, '对手', oppWon, ratings.A);
+  // 关键：必须根据「本机是玩家0还是玩家1」把对应的评分显示到对应面板。
+  // 玩家自己当作 A（index0），对手当作 B（index1）。
+  const isSelfA = self.index === 0;
+  const selfRating = isSelfA ? ratings.A : ratings.B;
+  const oppRating  = isSelfA ? ratings.B : ratings.A;
+  renderPlayerResult(selfPanel, self, opp, selfRating, '你', selfWon, oppRating);
+  renderPlayerResult(oppPanel, opp, self, oppRating, '对手', oppWon, selfRating);
 
   // 胜者横幅
   const banner = $('resultBanner');
