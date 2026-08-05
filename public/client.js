@@ -354,30 +354,31 @@ $('submitLineupBtn').addEventListener('click', () => {
 
 // ========== 渲染：结果 ==========
 function renderResult(state) {
-  const ratings = state.ratings || {};
   const winner = state.winner;
+  const self = getMe();
+  const opp = getOpponent();
 
   const title = $('resultTitle');
   title.classList.remove('win','lose','draw');
-  const self = getMe();
-  const opp = getOpponent();
 
   let selfWon = false, oppWon = false;
   if (winner === 'draw') {
     title.textContent = '平局！';
     title.classList.add('draw');
-  } else if (winner === 'A') {
-    const isSelfA = self.index === 0;
-    if (isSelfA) { title.textContent = '🎉 你赢了！'; title.classList.add('win'); selfWon = true; }
-    else { title.textContent = '你输了'; title.classList.add('lose'); oppWon = true; }
-  } else if (winner === 'B') {
-    const isSelfB = self.index === 1;
-    if (isSelfB) { title.textContent = '🎉 你赢了！'; title.classList.add('win'); selfWon = true; }
-    else { title.textContent = '你输了'; title.classList.add('lose'); oppWon = true; }
+  } else {
+    // 服务器已提供视角化结果：state.youWon
+    selfWon = !!state.youWon;
+    oppWon = !state.youWon;
+    if (selfWon) { title.textContent = '🎉 你赢了！'; title.classList.add('win'); }
+    else { title.textContent = '你输了'; title.classList.add('lose'); }
   }
 
+  // 视角化评分（服务器算好，frontend 不做 A/B 映射）
+  const selfRating = state.selfRating;
+  const oppRating = state.oppRating;
+
   // 玩家结果面板
-  const renderPlayerResult = (el, player, otherPlayer, rating, label, won, oppRating) => {
+  const renderPlayerResult = (el, player, otherPlayer, rating, label) => {
     el.innerHTML = '';
     const h = document.createElement('h3');
     h.textContent = `${label}：${player ? player.name : '玩家'}`;
@@ -389,7 +390,7 @@ function renderResult(state) {
     // 阵容
     const roster = document.createElement('div');
     roster.style.marginTop = '10px';
-    (player.lineup || []).forEach(slot => {
+    (player ? player.lineup || [] : []).forEach(slot => {
       const row = document.createElement('div');
       row.style.cssText = 'display:flex;justify-content:space-between;background:#111;border-radius:6px;padding:6px 10px;margin:4px 0;';
       row.innerHTML = `<span><strong>${slot.pos}</strong> ${slot.player.name}</span><span style="color:#ffd54d">${slot.player.cost}金币</span>`;
@@ -400,13 +401,8 @@ function renderResult(state) {
 
   const selfPanel = $('resultSelf');
   const oppPanel = $('resultOpp');
-  // 关键：必须根据「本机是玩家0还是玩家1」把对应的评分显示到对应面板。
-  // 玩家自己当作 A（index0），对手当作 B（index1）。
-  const isSelfA = self.index === 0;
-  const selfRating = isSelfA ? ratings.A : ratings.B;
-  const oppRating  = isSelfA ? ratings.B : ratings.A;
-  renderPlayerResult(selfPanel, self, opp, selfRating, '你', selfWon, oppRating);
-  renderPlayerResult(oppPanel, opp, self, oppRating, '对手', oppWon, selfRating);
+  renderPlayerResult(selfPanel, self, opp, selfRating, '你');
+  renderPlayerResult(oppPanel, opp, self, oppRating, '对手');
 
   // 胜者横幅
   const banner = $('resultBanner');
@@ -415,12 +411,11 @@ function renderResult(state) {
   else if (oppWon) banner.textContent = '胜者：对手';
   else banner.textContent = '';
 
-  // 详细计算明细
-  renderRatingDetail(ratings);
+  // 详细计算明细（视角化：你/对手 由服务器提供）
+  renderRatingDetail(selfRating, oppRating);
 }
 
-// ========== 渲染：计算明细表 ==========
-function renderRatingDetail(ratings) {
+function renderRatingDetail(selfRating, oppRating) {
   const container = $('ratingDetail');
   const metrics = [
     ['FINAL', '最终能力', (r) => r.final],
@@ -443,21 +438,21 @@ function renderRatingDetail(ratings) {
 
   let html = `<h3 style="margin-bottom:10px">📊 阵容能力计算明细</h3>`;
   html += `<table><thead><tr><th class="metric-name">计算项</th><th>你</th><th>对手</th><th>对比</th></tr></thead><tbody>`;
+  const a = selfRating || {};
+  const b = oppRating || {};
   metrics.forEach(([key, label, fn]) => {
-    const a = ratings.A ? fn(ratings.A) : 0;
-    const b = ratings.B ? fn(ratings.B) : 0;
+    const av = a && typeof a[key] !== 'undefined' ? fn(a) : (a ? fn(a) : 0);
+    const bv = b && typeof b[key] !== 'undefined' ? fn(b) : (b ? fn(b) : 0);
     let compareClass = '';
-    let compareText = '';
-    if (Math.abs(a - b) > 0.001) {
-      compareText = a > b ? '领先' : '落后';
-      compareClass = a > b ? 'better' : 'worse';
-    } else {
-      compareText = '持平';
+    let compareText = '持平';
+    if (Math.abs(av - bv) > 0.001) {
+      compareText = av > bv ? '领先' : '落后';
+      compareClass = av > bv ? 'better' : 'worse';
     }
     html += `<tr>
       <td class="metric-name">${label}</td>
-      <td>${fmt(a)}</td>
-      <td>${fmt(b)}</td>
+      <td>${fmt(av)}</td>
+      <td>${fmt(bv)}</td>
       <td class="${compareClass}">${compareText}</td>
     </tr>`;
   });
