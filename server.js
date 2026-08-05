@@ -313,6 +313,9 @@ function findPlayerIndex(room, socketId) {
 }
 
 // 广播房间状态给房间内两个玩家
+// 注意：每个玩家的状态（视角）必须只发给该玩家自己，绝不能广播给整个房间！
+// 若用 io.to(room.code).emit 会把不同视角的状态同时发给所有人，后者覆盖前者，
+// 导致两个客户端最终看到同一份视角，两个玩家就变成“同一个人”。
 function emitRoomState(roomCode) {
   const room = gameState.rooms.get(roomCode);
   if (!room) return;
@@ -320,7 +323,8 @@ function emitRoomState(roomCode) {
     const player = room.players[i];
     if (!player) continue;
     const view = gameState.getPublicState(room, player.socketId);
-    io.to(room.code).emit('stateUpdate', view);
+    // 只发给该玩家自己的 socket，而不是整个房间
+    io.to(player.socketId).emit('stateUpdate', view);
   }
 }
 
