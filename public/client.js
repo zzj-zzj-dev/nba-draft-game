@@ -61,6 +61,10 @@ $('joinBtn').addEventListener('click', () => {
   socket.emit('joinRoom', { code, name }, (res) => {
     if (res.ok) {
       myRoomCode = res.code;
+      // 成功加入后立即切到游戏界面，并由随后的 stateUpdate 完成渲染。
+      // 这样不会出现“点了没反应”，避免用户重复点击导致报‘房间已满’。
+      showScreen('game');
+      $('homeMsg').textContent = '';
     } else {
       $('homeMsg').textContent = '加入失败：' + res.error;
     }
@@ -453,6 +457,17 @@ function render(state) {
   me.name = state.players[me.index] ? state.players[me.index].name : (me.index === 0 ? '玩家A' : '玩家B');
   opponent.index = state.yourIndex === 0 ? 1 : 0;
   opponent.name = state.players[opponent.index] ? state.players[opponent.index].name : (opponent.index === 0 ? '玩家A' : '玩家B');
+
+  // 关键修复：只要服务器确认我们已在房间中（yourIndex 有效），
+  // 就自动从首页切换到游戏界面。避免“第一次加入成功但界面没反应、
+  // 再点一次却报已满”的问题。
+  if (state.yourIndex !== null && state.yourIndex !== undefined) {
+    showScreen('game');
+  }
+  // 加入/创建成功时同步记录房间码
+  if (state.code && !myRoomCode) {
+    myRoomCode = state.code;
+  }
 
   // 顶栏
   $('topRoomCode').textContent = state.code || '-';
