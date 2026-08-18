@@ -15,47 +15,12 @@
 module.exports = [
   // ==================== 5金币 超级巨星 ====================
   {
-    id: 'curry2016', name: '史蒂芬·库里', year: 2016, team: '金州勇士', positions: ['PG', 'SG'], cost: 5,
-    SC: 90, FIN: 62, MID: 88, THREE: 99, DRV: 88, BH: 96, ISO: 92, PM: 85, PASS: 83, OFF: 90,
-    GRV: 98, PD: 55, ID: 35, RIM: 25, REB: 45, ATH: 75, USG: 90, LEAD: 92
-  },
-  {
     id: 'lebron2012', name: '勒布朗·詹姆斯', year: 2012, team: '迈阿密热火', positions: ['SF', 'PF'], cost: 5,
     SC: 92, FIN: 95, MID: 78, THREE: 70, DRV: 98, BH: 92, ISO: 90, PM: 90, PASS: 92, OFF: 85,
     GRV: 95, PD: 85, ID: 80, RIM: 78, REB: 82, ATH: 97, USG: 92, LEAD: 96
   },
-  {
-    id: 'shaq2000', name: '沙奎尔·奥尼尔', year: 2000, team: '洛杉矶湖人', positions: ['C'], cost: 5,
-    SC: 94, FIN: 99, MID: 45, THREE: 5, DRV: 40, BH: 55, ISO: 88, PM: 35, PASS: 40, OFF: 55,
-    GRV: 90, PD: 75, ID: 92, RIM: 97, REB: 96, ATH: 88, USG: 85, LEAD: 82
-  },
-  {
-    id: 'jordan1996', name: '迈克尔·乔丹', year: 1996, team: '芝加哥公牛', positions: ['SG', 'SF'], cost: 5,
-    SC: 96, FIN: 94, MID: 95, THREE: 72, DRV: 95, BH: 93, ISO: 98, PM: 68, PASS: 72, OFF: 90,
-    GRV: 94, PD: 96, ID: 78, RIM: 80, REB: 78, ATH: 96, USG: 95, LEAD: 98
-  },
-  {
-    id: 'harden2019', name: '詹姆斯·哈登', year: 2019, team: '休斯顿火箭', positions: ['SG', 'PG'], cost: 5,
-    SC: 92, FIN: 88, MID: 78, THREE: 90, DRV: 95, BH: 97, ISO: 97, PM: 90, PASS: 85, OFF: 82,
-    GRV: 92, PD: 55, ID: 40, RIM: 38, REB: 62, ATH: 78, USG: 96, LEAD: 85
-  },
-  {
-    id: 'duncan2003', name: '蒂姆·邓肯', year: 2003, team: '圣安东尼奥马刺', positions: ['PF', 'C'], cost: 5,
-    SC: 88, FIN: 90, MID: 82, THREE: 20, DRV: 55, BH: 60, ISO: 86, PM: 45, PASS: 55, OFF: 78,
-    GRV: 85, PD: 92, ID: 95, RIM: 95, REB: 97, ATH: 78, USG: 75, LEAD: 95
-  },
-  {
-    id: 'durant2017', name: '凯文·杜兰特', year: 2017, team: '金州勇士', positions: ['SF', 'PF'], cost: 5,
-    SC: 96, FIN: 90, MID: 93, THREE: 92, DRV: 90, BH: 90, ISO: 96, PM: 70, PASS: 72, OFF: 94,
-    GRV: 96, PD: 82, ID: 82, RIM: 84, REB: 82, ATH: 88, USG: 86, LEAD: 85
-  },
 
   // ==================== 4金币 全明星级 ====================
-  {
-    id: 'kobe2006', name: '科比·布莱恩特', year: 2006, team: '洛杉矶湖人', positions: ['SG', 'SF'], cost: 4,
-    SC: 93, FIN: 89, MID: 94, THREE: 82, DRV: 92, BH: 94, ISO: 97, PM: 58, PASS: 60, OFF: 88,
-    GRV: 92, PD: 88, ID: 72, RIM: 70, REB: 72, ATH: 90, USG: 95, LEAD: 94
-  },
   {
     id: 'giannis2020', name: '扬尼斯·阿德托昆博', year: 2020, team: '密尔沃基雄鹿', positions: ['PF', 'SF'], cost: 4,
     SC: 90, FIN: 96, MID: 60, THREE: 48, DRV: 94, BH: 88, ISO: 88, PM: 75, PASS: 72, OFF: 82,
@@ -65,11 +30,6 @@ module.exports = [
     id: 'doncic2023', name: '卢卡·东契奇', year: 2023, team: '达拉斯独行侠', positions: ['PG', 'SG'], cost: 4,
     SC: 92, FIN: 85, MID: 86, THREE: 80, DRV: 86, BH: 96, ISO: 94, PM: 92, PASS: 90, OFF: 82,
     GRV: 92, PD: 55, ID: 45, RIM: 40, REB: 75, ATH: 72, USG: 94, LEAD: 88
-  },
-  {
-    id: 'embiid2023', name: '乔尔·恩比德', year: 2023, team: '费城76人', positions: ['C'], cost: 4,
-    SC: 92, FIN: 94, MID: 78, THREE: 60, DRV: 50, BH: 80, ISO: 90, PM: 55, PASS: 55, OFF: 72,
-    GRV: 88, PD: 82, ID: 88, RIM: 92, REB: 90, ATH: 80, USG: 92, LEAD: 84
   },
 
   // ==================== 3金币 优秀球员 ====================
