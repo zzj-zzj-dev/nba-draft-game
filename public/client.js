@@ -247,8 +247,21 @@ function renderDraftPool(pool, isMyTurn, myCoins) {
   }
 }
 
-// ========== 渲染：阵容调整阶段 ==========
-let draggingIndex = null;
+// ========== 渲染与拖拽：阵容调整阶段 ==========
+// 全局拖拽状态
+let dragState = null; // { idx, ghost, offsetX, offsetY, moved }
+
+// 判断指针是否命中某个位置槽（返回该槽位名或 null）
+function hitPosDrop(clientX, clientY) {
+  const drops = document.querySelectorAll('.pos-drop');
+  for (const el of drops) {
+    const r = el.getBoundingClientRect();
+    if (clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom) {
+      return el.getAttribute('data-pos');
+    }
+  }
+  return null;
+}
 
 function renderLineup() {
   const my = getMe();
@@ -274,7 +287,7 @@ function renderLineup() {
       card.classList.add('placed-card');
       dropEl.appendChild(card);
     } else {
-      dropEl.innerHTML = '<div style="color:rgba(255,255,255,0.5);font-size:13px;text-align:center;line-height:120px;">拖到这里</div>';
+      dropEl.innerHTML = '<div style="color:rgba(255,255,255,0.5);font-size:12px;text-align:center;line-height:100px;pointer-events:none;">按住球员拖到这里</div>';
     }
   });
 }
@@ -282,59 +295,99 @@ function renderLineup() {
 function createBenchPlayerCard(player, idx) {
   const card = document.createElement('div');
   card.className = 'bench-card';
-  card.draggable = true;
   card.innerHTML = `
     <div class="avatar" style="width:44px;height:44px;font-size:20px;border-radius:50%;background:linear-gradient(135deg,#0d9488,#ffd54d);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;">🏀</div>
     <div style="font-weight:700">${player.name}</div>
     <div style="font-size:12px;color:#9fb3c8">${player.positions.join('/')} · ${player.cost}金币</div>
   `;
-  // 拖拽起点
-  card.addEventListener('dragstart', (e) => {
-    draggingIndex = idx;
-    card.classList.add('dragging');
-    e.dataTransfer.setData('text/plain', String(idx));
-  });
-  card.addEventListener('dragend', () => { card.classList.remove('dragging'); });
 
-  // 右键长按看属性
-  card.addEventListener('contextmenu', (e) => e.preventDefault());
-  let t = null;
-  card.addEventListener('mousedown', (e) => {
-    if (e.button === 2) t = setTimeout(() => showPlayerDetail(player, null), 500);
-  });
-  card.addEventListener('mouseup', () => clearTimeout(t));
-  card.addEventListener('mouseleave', () => clearTimeout(t));
+  // ===== 拖拽：用指针事件（同时支持鼠标与触屏）=====
+  card.setAttribute('data-drag-idx', String(idx));
+  card.addEventListener('pointerdown', (e) => { startDrag(e, card, idx); });
 
-  // 点击移除位置（回替补）
-  card.addEventListener('click', (e) => {
-    if (e.button === 0 && !card.draggable) {
-      // placeholder
-    }
-  });
+  // 右键长按看属性（桌面）
+  card.addEventListener('contextmenu', (e) => { e.preventDefault(); });
+  let lt = null;
+  card.addEventListener('mousedown', (e) => { if (e.button === 2) lt = setTimeout(() => showPlayerDetail(player, null), 500); });
+  card.addEventListener('mouseup', () => clearTimeout(lt));
+  card.addEventListener('mouseleave', () => clearTimeout(lt));
 
   return card;
 }
 
-// 监听放置区 drop
-function setupDrops() {
-  ['PG','SG','SF','PF','C'].forEach(pos => {
-    const dropEl = document.querySelector(`.pos-drop[data-pos="${pos}"]`);
-    dropEl.addEventListener('dragover', (e) => { e.preventDefault(); dropEl.classList.add('over'); });
-    dropEl.addEventListener('dragleave', () => dropEl.classList.remove('over'));
-    dropEl.addEventListener('drop', (e) => {
-      e.preventDefault();
-      dropEl.classList.remove('over');
-      const idxStr = e.dataTransfer.getData('text/plain');
-      const idx = parseInt(idxStr, 10);
-      if (isNaN(idx)) return;
-      // 发送摆放请求
-      debounceAction(() => socket.emit('placePlayer', { slotIndex: idx, pos }, (res) => {
-        if (!res.ok) toast(res.error);
-      }));
-    });
-  });
+// 开始拖拽
+function startDrag(e, card, idx) {
+  // 阻止默认（避免复制/选中/滚动）
+  e.preventDefault();
+  e.stopPropagation();
+
+  // 若当前正在拖别的，先忽略
+  if (dragState) return;
+
+  // 记录卡片初始位置，克隆一个跟随层
+  const rect = card.getBoundingClientRect();
+  const ghost = card.cloneNode(true);
+  ghost.classList.add('dragging-ghost');
+  ghost.style.left = (e.clientX - (e.clientX - rect.left)) + 'px';
+  ghost.style.top = (e.clientY - (e.clientY - rect.top)) + 'px';
+  document.body.appendChild(ghost);
+
+  dragState = {
+    idx: idx,
+    ghost: ghost,
+    offsetX: e.clientX - rect.left,
+    offsetY: e.clientY - rect.top,
+    moved: false,
+  };
+
+  // 隐藏原卡片（视觉上跟随着 ghost）
+  card.style.opacity = '0.3';
+
+  // 防止拖动时选中/复制文字（CSS 全局 user-select 已兜底）
+  // 注意：不锁定 body 滚动，避免手机上无法滚动到下方位置槽拖拽。
+  moveGhost(e.clientX, e.clientY);
 }
-setupDrops();
+
+// 移动跟随层
+function moveGhost(clientX, clientY) {
+  if (!dragState) return;
+  dragState.ghost.style.left = (clientX - dragState.offsetX) + 'px';
+  dragState.ghost.style.top = (clientY - dragState.offsetY) + 'px';
+  // 高亮命中的位置槽
+  const dropEls = document.querySelectorAll('.pos-drop');
+  dropEls.forEach(d => d.classList.remove('over'));
+  const hit = hitPosDrop(clientX, clientY);
+  if (hit) {
+    const el = document.querySelector(`.pos-drop[data-pos="${hit}"]`);
+    if (el) el.classList.add('over');
+  }
+}
+
+// 结束拖拽
+function endDrag(e) {
+  if (!dragState) return;
+  const hit = hitPosDrop(e.clientX, e.clientY);
+  const idx = dragState.idx;
+
+  // 清理跟随层与锁定
+  if (dragState.ghost && dragState.ghost.parentNode) dragState.ghost.parentNode.removeChild(dragState.ghost);
+  // 还原所有原卡片透明度
+  document.querySelectorAll('.bench-card').forEach(c => { c.style.opacity = ''; });
+  document.querySelectorAll('.pos-drop').forEach(d => d.classList.remove('over'));
+
+  dragState = null;
+  if (hit) {
+    // 发送摆放请求
+    debounceAction(() => socket.emit('placePlayer', { slotIndex: idx, pos: hit }, (res) => {
+      if (!res.ok) toast(res.error);
+    }));
+  }
+}
+
+// 全局指针移动/抬起监听（无论目标在哪都生效，确保跟手）
+document.addEventListener('pointermove', (e) => { moveGhost(e.clientX, e.clientY); });
+document.addEventListener('pointerup', (e) => { endDrag(e); });
+document.addEventListener('pointercancel', (e) => { endDrag(e); });
 
 // ========== 确认阵容 ==========
 $('submitLineupBtn').addEventListener('click', () => {
