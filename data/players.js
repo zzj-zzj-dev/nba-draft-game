@@ -161,11 +161,6 @@ module.exports = [
     GRV: 76, PD: 92, ID: 86, RIM: 82, REB: 84, ATH: 78, USG: 70, LEAD: 90
   },
   {
-    id: 'irving2011', name: '德怀特·霍华德', year: 2011, team: '奥兰多魔术', positions: ['C'], cost: 2,
-    SC: 70, FIN: 84, MID: 30, THREE: 5, DRV: 45, BH: 42, ISO: 62, PM: 30, PASS: 32, OFF: 55,
-    GRV: 68, PD: 84, ID: 90, RIM: 95, REB: 96, ATH: 88, USG: 75, LEAD: 70
-  },
-  {
     id: 'lillard2019', name: '达米安·利拉德', year: 2019, team: '波特兰开拓者', positions: ['PG'], cost: 2,
     SC: 84, FIN: 72, MID: 80, THREE: 88, DRV: 86, BH: 88, ISO: 88, PM: 74, PASS: 72, OFF: 78,
     GRV: 80, PD: 50, ID: 35, RIM: 30, REB: 52, ATH: 78, USG: 88, LEAD: 82
@@ -187,11 +182,6 @@ module.exports = [
   },
 
   // ==================== 1金币 普通球员 ====================
-  {
-    id: 'smarts2022', name: '马库斯·斯马特', year: 2022, team: '波士顿凯尔特人', positions: ['PG', 'SG'], cost: 1,
-    SC: 50, FIN: 48, MID: 45, THREE: 55, DRV: 62, BH: 68, ISO: 50, PM: 65, PASS: 68, OFF: 58,
-    GRV: 55, PD: 85, ID: 55, RIM: 45, REB: 55, ATH: 68, USG: 62, LEAD: 78
-  },
   {
     id: 'mills2021', name: '帕特里克·米尔斯', year: 2021, team: '圣安东尼奥马刺', positions: ['PG', 'SG'], cost: 1,
     SC: 55, FIN: 42, MID: 60, THREE: 76, DRV: 60, BH: 64, ISO: 52, PM: 55, PASS: 55, OFF: 62,
