@@ -15,7 +15,7 @@ const PHASES = {
 };
 
 // 每个玩家初始金币
-const START_COINS = 15;
+const START_COINS = 12;
 // 待选总池规模（一次性给出，两玩家轮流选，被选的移除）
 const DRAFT_POOL_SIZE = 25;
 // 每名玩家最终挑选人数
