@@ -57,34 +57,14 @@ module.exports = [
     GRV: 92, PD: 88, ID: 72, RIM: 70, REB: 72, ATH: 90, USG: 95, LEAD: 94
   },
   {
-    id: 'garnett2004', name: '凯文·加内特', year: 2004, team: '明尼苏达森林狼', positions: ['PF', 'C'], cost: 4,
-    SC: 84, FIN: 84, MID: 78, THREE: 35, DRV: 66, BH: 60, ISO: 76, PM: 65, PASS: 72, OFF: 80,
-    GRV: 82, PD: 92, ID: 94, RIM: 93, REB: 96, ATH: 88, USG: 78, LEAD: 90
-  },
-  {
     id: 'giannis2020', name: '扬尼斯·阿德托昆博', year: 2020, team: '密尔沃基雄鹿', positions: ['PF', 'SF'], cost: 4,
     SC: 90, FIN: 96, MID: 60, THREE: 48, DRV: 94, BH: 88, ISO: 88, PM: 75, PASS: 72, OFF: 82,
     GRV: 90, PD: 88, ID: 88, RIM: 94, REB: 92, ATH: 98, USG: 92, LEAD: 85
   },
   {
-    id: 'jokic2022', name: '尼古拉·约基奇', year: 2022, team: '丹佛掘金', positions: ['C'], cost: 4,
-    SC: 90, FIN: 92, MID: 80, THREE: 68, DRV: 60, BH: 88, ISO: 84, PM: 92, PASS: 95, OFF: 80,
-    GRV: 90, PD: 62, ID: 70, RIM: 72, REB: 93, ATH: 62, USG: 88, LEAD: 88
-  },
-  {
-    id: 'kawhi2019', name: '科怀·伦纳德', year: 2019, team: '多伦多猛龙', positions: ['SF', 'SG'], cost: 4,
-    SC: 90, FIN: 86, MID: 90, THREE: 84, DRV: 85, BH: 85, ISO: 92, PM: 65, PASS: 66, OFF: 88,
-    GRV: 90, PD: 93, ID: 85, RIM: 82, REB: 80, ATH: 84, USG: 84, LEAD: 84
-  },
-  {
     id: 'doncic2023', name: '卢卡·东契奇', year: 2023, team: '达拉斯独行侠', positions: ['PG', 'SG'], cost: 4,
     SC: 92, FIN: 85, MID: 86, THREE: 80, DRV: 86, BH: 96, ISO: 94, PM: 92, PASS: 90, OFF: 82,
     GRV: 92, PD: 55, ID: 45, RIM: 40, REB: 75, ATH: 72, USG: 94, LEAD: 88
-  },
-  {
-    id: 'westbrook2017', name: '拉塞尔·威斯布鲁克', year: 2017, team: '俄克拉荷马城雷霆', positions: ['PG'], cost: 4,
-    SC: 88, FIN: 88, MID: 62, THREE: 55, DRV: 96, BH: 90, ISO: 84, PM: 88, PASS: 82, OFF: 78,
-    GRV: 88, PD: 72, ID: 50, RIM: 55, REB: 85, ATH: 96, USG: 97, LEAD: 88
   },
   {
     id: 'embiid2023', name: '乔尔·恩比德', year: 2023, team: '费城76人', positions: ['C'], cost: 4,
@@ -94,19 +74,9 @@ module.exports = [
 
   // ==================== 3金币 优秀球员 ====================
   {
-    id: 'kyrie2016', name: '凯里·欧文', year: 2016, team: '克里夫兰骑士', positions: ['PG', 'SG'], cost: 3,
-    SC: 87, FIN: 82, MID: 88, THREE: 84, DRV: 94, BH: 97, ISO: 94, PM: 72, PASS: 70, OFF: 78,
-    GRV: 82, PD: 55, ID: 35, RIM: 30, REB: 48, ATH: 82, USG: 90, LEAD: 72
-  },
-  {
     id: 'paul2009', name: '克里斯·保罗', year: 2009, team: '新奥尔良黄蜂', positions: ['PG'], cost: 3,
     SC: 82, FIN: 72, MID: 84, THREE: 80, DRV: 88, BH: 92, ISO: 86, PM: 96, PASS: 96, OFF: 82,
     GRV: 84, PD: 90, ID: 55, RIM: 40, REB: 62, ATH: 78, USG: 85, LEAD: 90
-  },
-  {
-    id: 'booker2021', name: '德文·布克', year: 2021, team: '菲尼克斯太阳', positions: ['SG', 'PG'], cost: 3,
-    SC: 88, FIN: 78, MID: 85, THREE: 86, DRV: 82, BH: 86, ISO: 88, PM: 72, PASS: 72, OFF: 84,
-    GRV: 82, PD: 62, ID: 45, RIM: 38, REB: 58, ATH: 76, USG: 88, LEAD: 78
   },
   {
     id: 'emoni2010', name: '卡梅隆·安东尼', year: 2010, team: '丹佛掘金', positions: ['SF', 'PF'], cost: 3,
