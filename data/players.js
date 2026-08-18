@@ -99,24 +99,9 @@ module.exports = [
     GRV: 82, PD: 55, ID: 35, RIM: 30, REB: 48, ATH: 82, USG: 90, LEAD: 72
   },
   {
-    id: 'ad2018', name: '安东尼·戴维斯', year: 2018, team: '新奥尔良鹈鹕', positions: ['PF', 'C'], cost: 3,
-    SC: 85, FIN: 88, MID: 75, THREE: 55, DRV: 72, BH: 68, ISO: 80, PM: 50, PASS: 55, OFF: 78,
-    GRV: 82, PD: 90, ID: 92, RIM: 94, REB: 92, ATH: 85, USG: 85, LEAD: 75
-  },
-  {
     id: 'paul2009', name: '克里斯·保罗', year: 2009, team: '新奥尔良黄蜂', positions: ['PG'], cost: 3,
     SC: 82, FIN: 72, MID: 84, THREE: 80, DRV: 88, BH: 92, ISO: 86, PM: 96, PASS: 96, OFF: 82,
     GRV: 84, PD: 90, ID: 55, RIM: 40, REB: 62, ATH: 78, USG: 85, LEAD: 90
-  },
-  {
-    id: 'butler2020', name: '吉米·巴特勒', year: 2020, team: '迈阿密热火', positions: ['SF', 'SG'], cost: 3,
-    SC: 84, FIN: 82, MID: 76, THREE: 72, DRV: 85, BH: 82, ISO: 84, PM: 78, PASS: 78, OFF: 82,
-    GRV: 84, PD: 88, ID: 70, RIM: 62, REB: 70, ATH: 82, USG: 86, LEAD: 88
-  },
-  {
-    id: 'tatum2022', name: '杰森·塔图姆', year: 2022, team: '波士顿凯尔特人', positions: ['SF', 'PF'], cost: 3,
-    SC: 86, FIN: 80, MID: 82, THREE: 84, DRV: 84, BH: 85, ISO: 88, PM: 62, PASS: 65, OFF: 86,
-    GRV: 84, PD: 78, ID: 75, RIM: 72, REB: 80, ATH: 82, USG: 88, LEAD: 80
   },
   {
     id: 'booker2021', name: '德文·布克', year: 2021, team: '菲尼克斯太阳', positions: ['SG', 'PG'], cost: 3,
@@ -129,11 +114,6 @@ module.exports = [
     GRV: 82, PD: 58, ID: 52, RIM: 45, REB: 62, ATH: 82, USG: 92, LEAD: 78
   },
   {
-    id: 'george2019', name: '保罗·乔治', year: 2019, team: '俄克拉荷马城雷霆', positions: ['SF', 'SG'], cost: 3,
-    SC: 84, FIN: 76, MID: 80, THREE: 85, DRV: 84, BH: 82, ISO: 84, PM: 66, PASS: 68, OFF: 84,
-    GRV: 82, PD: 90, ID: 78, RIM: 72, REB: 72, ATH: 78, USG: 82, LEAD: 76
-  },
-  {
     id: 'towns2020', name: '卡尔-安东尼·唐斯', year: 2020, team: '明尼苏达森林狼', positions: ['C', 'PF'], cost: 3,
     SC: 84, FIN: 82, MID: 82, THREE: 78, DRV: 55, BH: 68, ISO: 76, PM: 52, PASS: 55, OFF: 80,
     GRV: 76, PD: 62, ID: 70, RIM: 78, REB: 88, ATH: 78, USG: 80, LEAD: 72
@@ -141,24 +121,9 @@ module.exports = [
 
   // ==================== 2金币 角色球员 ====================
   {
-    id: 'klay2016', name: '克莱·汤普森', year: 2016, team: '金州勇士', positions: ['SG', 'SF'], cost: 2,
-    SC: 78, FIN: 66, MID: 80, THREE: 92, DRV: 68, BH: 70, ISO: 68, PM: 52, PASS: 55, OFF: 88,
-    GRV: 78, PD: 80, ID: 55, RIM: 45, REB: 55, ATH: 72, USG: 70, LEAD: 78
-  },
-  {
-    id: 'rayallen2008', name: '雷·阿伦', year: 2008, team: '波士顿凯尔特人', positions: ['SG', 'PG'], cost: 2,
-    SC: 80, FIN: 68, MID: 88, THREE: 93, DRV: 75, BH: 76, ISO: 78, PM: 60, PASS: 62, OFF: 90,
-    GRV: 78, PD: 72, ID: 45, RIM: 38, REB: 55, ATH: 76, USG: 70, LEAD: 82
-  },
-  {
     id: 'gasol2010', name: '保罗·加索尔', year: 2010, team: '洛杉矶湖人', positions: ['PF', 'C'], cost: 2,
     SC: 78, FIN: 80, MID: 78, THREE: 30, DRV: 55, BH: 60, ISO: 76, PM: 62, PASS: 70, OFF: 72,
     GRV: 72, PD: 76, ID: 80, RIM: 80, REB: 88, ATH: 68, USG: 72, LEAD: 82
-  },
-  {
-    id: 'draymond2016', name: '德雷蒙德·格林', year: 2016, team: '金州勇士', positions: ['PF', 'C'], cost: 2,
-    SC: 52, FIN: 62, MID: 48, THREE: 50, DRV: 58, BH: 68, ISO: 45, PM: 78, PASS: 82, OFF: 72,
-    GRV: 76, PD: 92, ID: 86, RIM: 82, REB: 84, ATH: 78, USG: 70, LEAD: 90
   },
   {
     id: 'lillard2019', name: '达米安·利拉德', year: 2019, team: '波特兰开拓者', positions: ['PG'], cost: 2,
