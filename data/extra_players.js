@@ -309,5 +309,255 @@ module.exports = [
     id: 'lillard2013', name: '达米安·利拉德', year: 2013, team: '波特兰开拓者', positions: ['PG'], cost: 1,
     SC: 78, FIN: 70, MID: 72, THREE: 80, DRV: 72, BH: 74, ISO: 72, PM: 70, PASS: 68, OFF: 65,
     GRV: 65, PD: 62, ID: 48, RIM: 42, REB: 48, ATH: 74, USG: 70, LEAD: 60
+  },
+  {
+    id: 'poole2022', name: '乔丹·普尔', year: 2022, team: '金州勇士', positions: ['SG', 'PG'], cost: 2,
+    SC: 82, FIN: 74, MID: 78, THREE: 84, DRV: 78, BH: 80, ISO: 76, PM: 68, PASS: 70, OFF: 72,
+    GRV: 68, PD: 68, ID: 50, RIM: 45, REB: 50, ATH: 78, USG: 75, LEAD: 60
+  },
+  {
+    id: 'castle2026', name: '斯蒂芬·卡斯尔', year: 2026, team: '圣安东尼奥马刺', positions: ['PG', 'SG'], cost: 2,
+    SC: 76, FIN: 70, MID: 74, THREE: 72, DRV: 78, BH: 76, ISO: 74, PM: 72, PASS: 70, OFF: 68,
+    GRV: 65, PD: 74, ID: 55, RIM: 48, REB: 55, ATH: 80, USG: 70, LEAD: 60
+  },
+  {
+    id: 'conley2021', name: '迈克·康利', year: 2021, team: '犹他爵士', positions: ['PG'], cost: 2,
+    SC: 78, FIN: 68, MID: 80, THREE: 78, DRV: 70, BH: 76, ISO: 72, PM: 76, PASS: 78, OFF: 70,
+    GRV: 68, PD: 72, ID: 50, RIM: 45, REB: 50, ATH: 72, USG: 65, LEAD: 72
+  },
+  {
+    id: 'tobias_harris2021', name: '托拜厄斯·哈里斯', year: 2021, team: '费城76人', positions: ['PF', 'SF'], cost: 2,
+    SC: 80, FIN: 76, MID: 78, THREE: 74, DRV: 72, BH: 68, ISO: 72, PM: 58, PASS: 60, OFF: 74,
+    GRV: 68, PD: 70, ID: 68, RIM: 62, REB: 72, ATH: 74, USG: 60, LEAD: 62
+  },
+  {
+    id: 'hayward2020', name: '戈登·海沃德', year: 2020, team: '波士顿凯尔特人', positions: ['SF', 'SG'], cost: 2,
+    SC: 78, FIN: 72, MID: 80, THREE: 78, DRV: 72, BH: 72, ISO: 74, PM: 66, PASS: 68, OFF: 76,
+    GRV: 68, PD: 70, ID: 58, RIM: 50, REB: 62, ATH: 72, USG: 65, LEAD: 65
+  },
+  {
+    id: 'wiggins2022', name: '安德鲁·维金斯', year: 2022, team: '金州勇士', positions: ['SF', 'SG'], cost: 2,
+    SC: 78, FIN: 74, MID: 72, THREE: 76, DRV: 74, BH: 70, ISO: 74, PM: 56, PASS: 58, OFF: 74,
+    GRV: 66, PD: 76, ID: 64, RIM: 58, REB: 64, ATH: 80, USG: 65, LEAD: 60
+  },
+  {
+    id: 'jerami_grant2021', name: '杰拉米·格兰特', year: 2021, team: '底特律活塞', positions: ['PF', 'SF'], cost: 2,
+    SC: 80, FIN: 72, MID: 76, THREE: 80, DRV: 70, BH: 66, ISO: 72, PM: 52, PASS: 55, OFF: 74,
+    GRV: 66, PD: 72, ID: 68, RIM: 62, REB: 68, ATH: 76, USG: 65, LEAD: 58
+  },
+  {
+    id: 'smart2022', name: '马库斯·斯马特', year: 2022, team: '波士顿凯尔特人', positions: ['PG', 'SG'], cost: 2,
+    SC: 72, FIN: 68, MID: 72, THREE: 76, DRV: 70, BH: 72, ISO: 66, PM: 72, PASS: 74, OFF: 68,
+    GRV: 62, PD: 88, ID: 58, RIM: 50, REB: 56, ATH: 76, USG: 60, LEAD: 68
+  },
+  {
+    id: 'vanvleet2023', name: '弗雷德·范弗利特', year: 2023, team: '多伦多猛龙', positions: ['PG'], cost: 2,
+    SC: 78, FIN: 68, MID: 76, THREE: 80, DRV: 72, BH: 76, ISO: 72, PM: 74, PASS: 76, OFF: 68,
+    GRV: 66, PD: 76, ID: 52, RIM: 46, REB: 52, ATH: 72, USG: 70, LEAD: 68
+  },
+  {
+    id: 'rozier2021', name: '特里·罗齐尔', year: 2021, team: '夏洛特黄蜂', positions: ['PG', 'SG'], cost: 2,
+    SC: 80, FIN: 72, MID: 76, THREE: 78, DRV: 76, BH: 76, ISO: 74, PM: 68, PASS: 70, OFF: 68,
+    GRV: 65, PD: 72, ID: 50, RIM: 45, REB: 52, ATH: 76, USG: 72, LEAD: 62
+  },
+  {
+    id: 'michael_porter2023', name: '小迈克尔·波特', year: 2023, team: '丹佛掘金', positions: ['SF', 'PF'], cost: 2,
+    SC: 82, FIN: 70, MID: 78, THREE: 84, DRV: 66, BH: 62, ISO: 70, PM: 48, PASS: 50, OFF: 78,
+    GRV: 70, PD: 64, ID: 62, RIM: 58, REB: 68, ATH: 72, USG: 60, LEAD: 55
+  },
+  {
+    id: 'barrett2023', name: 'RJ·巴雷特', year: 2023, team: '纽约尼克斯', positions: ['SG', 'SF'], cost: 2,
+    SC: 78, FIN: 74, MID: 72, THREE: 74, DRV: 76, BH: 72, ISO: 72, PM: 62, PASS: 64, OFF: 72,
+    GRV: 64, PD: 68, ID: 58, RIM: 50, REB: 60, ATH: 76, USG: 68, LEAD: 58
+  },
+  {
+    id: 'herro2022', name: '泰勒·希罗', year: 2022, team: '迈阿密热火', positions: ['SG', 'PG'], cost: 2,
+    SC: 82, FIN: 72, MID: 78, THREE: 82, DRV: 74, BH: 76, ISO: 74, PM: 64, PASS: 66, OFF: 72,
+    GRV: 66, PD: 62, ID: 48, RIM: 42, REB: 50, ATH: 72, USG: 72, LEAD: 58
+  },
+  {
+    id: 'russell2019', name: '德安杰洛·拉塞尔', year: 2019, team: '布鲁克林篮网', positions: ['PG', 'SG'], cost: 2,
+    SC: 80, FIN: 68, MID: 76, THREE: 80, DRV: 72, BH: 78, ISO: 74, PM: 76, PASS: 78, OFF: 68,
+    GRV: 68, PD: 64, ID: 50, RIM: 45, REB: 52, ATH: 72, USG: 72, LEAD: 66
+  },
+  {
+    id: 'schroder2020', name: '丹尼斯·施罗德', year: 2020, team: '俄克拉荷马雷霆', positions: ['PG'], cost: 2,
+    SC: 76, FIN: 70, MID: 74, THREE: 72, DRV: 78, BH: 76, ISO: 72, PM: 72, PASS: 74, OFF: 66,
+    GRV: 62, PD: 72, ID: 50, RIM: 45, REB: 52, ATH: 78, USG: 70, LEAD: 62
+  },
+  {
+    id: 'bogdanovic2021', name: '博扬·博格达诺维奇', year: 2021, team: '犹他爵士', positions: ['SF', 'PF'], cost: 2,
+    SC: 80, FIN: 68, MID: 78, THREE: 84, DRV: 64, BH: 62, ISO: 68, PM: 50, PASS: 52, OFF: 78,
+    GRV: 70, PD: 62, ID: 58, RIM: 52, REB: 60, ATH: 68, USG: 58, LEAD: 58
+  },
+  {
+    id: 'ingles2021', name: '乔·英格尔斯', year: 2021, team: '犹他爵士', positions: ['SF', 'PF'], cost: 2,
+    SC: 72, FIN: 58, MID: 74, THREE: 80, DRV: 60, BH: 66, ISO: 62, PM: 70, PASS: 72, OFF: 76,
+    GRV: 66, PD: 68, ID: 58, RIM: 50, REB: 58, ATH: 64, USG: 50, LEAD: 64
+  },
+  {
+    id: 'ibaka2014', name: '赛尔吉·伊巴卡', year: 2014, team: '俄克拉荷马雷霆', positions: ['PF', 'C'], cost: 2,
+    SC: 74, FIN: 72, MID: 70, THREE: 72, DRV: 62, BH: 58, ISO: 62, PM: 50, PASS: 52, OFF: 68,
+    GRV: 60, PD: 78, ID: 84, RIM: 86, REB: 82, ATH: 76, USG: 55, LEAD: 58
+  },
+  {
+    id: 'adams2018', name: '史蒂文·亚当斯', year: 2018, team: '俄克拉荷马雷霆', positions: ['C'], cost: 2,
+    SC: 66, FIN: 76, MID: 40, THREE: 25, DRV: 55, BH: 48, ISO: 52, PM: 42, PASS: 44, OFF: 60,
+    GRV: 50, PD: 60, ID: 80, RIM: 84, REB: 88, ATH: 72, USG: 50, LEAD: 52
+  },
+  {
+    id: 'capela2019', name: '克林特·卡佩拉', year: 2019, team: '休斯顿火箭', positions: ['C'], cost: 2,
+    SC: 68, FIN: 80, MID: 30, THREE: 20, DRV: 60, BH: 45, ISO: 50, PM: 40, PASS: 42, OFF: 62,
+    GRV: 50, PD: 58, ID: 82, RIM: 86, REB: 88, ATH: 78, USG: 50, LEAD: 50
+  },
+  {
+    id: 'nurkic2019', name: '优素福·努尔基奇', year: 2019, team: '波特兰开拓者', positions: ['C'], cost: 2,
+    SC: 70, FIN: 74, MID: 52, THREE: 30, DRV: 58, BH: 50, ISO: 56, PM: 52, PASS: 54, OFF: 62,
+    GRV: 55, PD: 60, ID: 76, RIM: 80, REB: 84, ATH: 68, USG: 55, LEAD: 55
+  },
+  {
+    id: 'myles_turner2021', name: '迈尔斯·特纳', year: 2021, team: '印第安纳步行者', positions: ['C', 'PF'], cost: 2,
+    SC: 72, FIN: 70, MID: 68, THREE: 74, DRV: 58, BH: 52, ISO: 58, PM: 50, PASS: 52, OFF: 68,
+    GRV: 60, PD: 78, ID: 84, RIM: 88, REB: 82, ATH: 72, USG: 55, LEAD: 58
+  },
+  {
+    id: 'jarrett_allen2022', name: '贾勒特·阿伦', year: 2022, team: '克利夫兰骑士', positions: ['C'], cost: 2,
+    SC: 70, FIN: 78, MID: 40, THREE: 25, DRV: 60, BH: 48, ISO: 52, PM: 45, PASS: 48, OFF: 64,
+    GRV: 52, PD: 60, ID: 80, RIM: 84, REB: 86, ATH: 76, USG: 50, LEAD: 52
+  },
+  {
+    id: 'ayton2021', name: '德安德烈·艾顿', year: 2021, team: '菲尼克斯太阳', positions: ['C'], cost: 2,
+    SC: 76, FIN: 78, MID: 60, THREE: 30, DRV: 64, BH: 52, ISO: 60, PM: 48, PASS: 50, OFF: 66,
+    GRV: 55, PD: 62, ID: 76, RIM: 80, REB: 82, ATH: 74, USG: 58, LEAD: 55
+  },
+  {
+    id: 'middleton2020', name: '克里斯·米德尔顿', year: 2020, team: '密尔沃基雄鹿', positions: ['SG', 'SF'], cost: 2,
+    SC: 82, FIN: 74, MID: 80, THREE: 78, DRV: 72, BH: 72, ISO: 76, PM: 64, PASS: 66, OFF: 74,
+    GRV: 68, PD: 72, ID: 58, RIM: 50, REB: 60, ATH: 70, USG: 68, LEAD: 64
+  },
+  {
+    id: 'jrue_holiday2021', name: '朱·霍勒迪', year: 2021, team: '密尔沃基雄鹿', positions: ['PG', 'SG'], cost: 2,
+    SC: 76, FIN: 70, MID: 74, THREE: 72, DRV: 70, BH: 72, ISO: 68, PM: 74, PASS: 76, OFF: 68,
+    GRV: 62, PD: 86, ID: 62, RIM: 52, REB: 58, ATH: 76, USG: 60, LEAD: 70
+  },
+  {
+    id: 'bledsoe2019', name: '埃里克·布莱索', year: 2019, team: '密尔沃基雄鹿', positions: ['PG', 'SG'], cost: 2,
+    SC: 74, FIN: 72, MID: 68, THREE: 66, DRV: 78, BH: 74, ISO: 70, PM: 70, PASS: 72, OFF: 66,
+    GRV: 60, PD: 80, ID: 58, RIM: 50, REB: 56, ATH: 80, USG: 68, LEAD: 62
+  },
+  {
+    id: 'oladipo2018', name: '维克托·奥拉迪波', year: 2018, team: '印第安纳步行者', positions: ['SG', 'PG'], cost: 2,
+    SC: 80, FIN: 72, MID: 76, THREE: 74, DRV: 78, BH: 74, ISO: 76, PM: 68, PASS: 70, OFF: 68,
+    GRV: 66, PD: 82, ID: 58, RIM: 50, REB: 60, ATH: 82, USG: 72, LEAD: 64
+  },
+  {
+    id: 'lavine2021', name: '扎克·拉文', year: 2021, team: '芝加哥公牛', positions: ['SG', 'SF'], cost: 2,
+    SC: 84, FIN: 76, MID: 78, THREE: 82, DRV: 78, BH: 74, ISO: 78, PM: 62, PASS: 64, OFF: 72,
+    GRV: 68, PD: 64, ID: 52, RIM: 46, REB: 54, ATH: 80, USG: 74, LEAD: 58
+  },
+  {
+    id: 'sexton2021', name: '科林·塞克斯顿', year: 2021, team: '克利夫兰骑士', positions: ['PG', 'SG'], cost: 2,
+    SC: 80, FIN: 72, MID: 74, THREE: 76, DRV: 76, BH: 74, ISO: 76, PM: 68, PASS: 66, OFF: 66,
+    GRV: 64, PD: 64, ID: 48, RIM: 42, REB: 50, ATH: 78, USG: 74, LEAD: 58
+  },
+  {
+    id: 'fox2021', name: '达龙·福克斯', year: 2021, team: '萨克拉门托国王', positions: ['PG'], cost: 2,
+    SC: 80, FIN: 74, MID: 72, THREE: 74, DRV: 82, BH: 78, ISO: 76, PM: 72, PASS: 70, OFF: 68,
+    GRV: 66, PD: 70, ID: 50, RIM: 45, REB: 52, ATH: 84, USG: 76, LEAD: 64
+  },
+  {
+    id: 'sga2020', name: '谢伊·吉尔杰斯-亚历山大', year: 2020, team: '俄克拉荷马雷霆', positions: ['PG', 'SG'], cost: 2,
+    SC: 78, FIN: 72, MID: 74, THREE: 70, DRV: 76, BH: 78, ISO: 74, PM: 70, PASS: 72, OFF: 66,
+    GRV: 64, PD: 72, ID: 58, RIM: 50, REB: 56, ATH: 76, USG: 70, LEAD: 62
+  },
+  {
+    id: 'jamal_murray2020', name: '贾马尔·穆雷', year: 2020, team: '丹佛掘金', positions: ['PG', 'SG'], cost: 2,
+    SC: 82, FIN: 74, MID: 78, THREE: 80, DRV: 74, BH: 76, ISO: 78, PM: 72, PASS: 74, OFF: 68,
+    GRV: 68, PD: 68, ID: 52, RIM: 46, REB: 54, ATH: 74, USG: 72, LEAD: 66
+  },
+  {
+    id: 'mccollum2021', name: 'CJ·麦科勒姆', year: 2021, team: '波特兰开拓者', positions: ['SG', 'PG'], cost: 2,
+    SC: 84, FIN: 70, MID: 80, THREE: 82, DRV: 72, BH: 76, ISO: 78, PM: 66, PASS: 68, OFF: 72,
+    GRV: 68, PD: 64, ID: 50, RIM: 45, REB: 52, ATH: 70, USG: 70, LEAD: 62
+  },
+  {
+    id: 'jjj2022', name: '小贾伦·杰克逊', year: 2022, team: '孟菲斯灰熊', positions: ['PF', 'C'], cost: 2,
+    SC: 76, FIN: 70, MID: 72, THREE: 78, DRV: 64, BH: 60, ISO: 66, PM: 52, PASS: 54, OFF: 70,
+    GRV: 64, PD: 80, ID: 84, RIM: 86, REB: 78, ATH: 76, USG: 60, LEAD: 58
+  },
+  {
+    id: 'mobley2022', name: '埃文·莫布利', year: 2022, team: '克利夫兰骑士', positions: ['PF', 'C'], cost: 2,
+    SC: 74, FIN: 72, MID: 68, THREE: 68, DRV: 66, BH: 62, ISO: 66, PM: 60, PASS: 62, OFF: 68,
+    GRV: 62, PD: 78, ID: 82, RIM: 84, REB: 80, ATH: 76, USG: 60, LEAD: 58
+  },
+  {
+    id: 'scottie_barnes2022', name: '斯科蒂·巴恩斯', year: 2022, team: '多伦多猛龙', positions: ['SF', 'PF'], cost: 2,
+    SC: 76, FIN: 72, MID: 68, THREE: 72, DRV: 70, BH: 68, ISO: 70, PM: 66, PASS: 68, OFF: 72,
+    GRV: 64, PD: 76, ID: 72, RIM: 66, REB: 74, ATH: 78, USG: 62, LEAD: 62
+  },
+  {
+    id: 'franz_wagner2023', name: '弗朗茨·瓦格纳', year: 2023, team: '奥兰多魔术', positions: ['SF', 'PF'], cost: 2,
+    SC: 78, FIN: 72, MID: 74, THREE: 76, DRV: 72, BH: 70, ISO: 72, PM: 64, PASS: 66, OFF: 74,
+    GRV: 66, PD: 72, ID: 64, RIM: 58, REB: 66, ATH: 74, USG: 64, LEAD: 60
+  },
+  {
+    id: 'giddey2023', name: '约什·吉迪', year: 2023, team: '俄克拉荷马雷霆', positions: ['PG', 'SG'], cost: 2,
+    SC: 72, FIN: 68, MID: 70, THREE: 68, DRV: 70, BH: 74, ISO: 68, PM: 76, PASS: 78, OFF: 66,
+    GRV: 62, PD: 70, ID: 58, RIM: 52, REB: 60, ATH: 72, USG: 62, LEAD: 64
+  },
+  {
+    id: 'cunningham2023', name: '凯德·坎宁安', year: 2023, team: '底特律活塞', positions: ['PG', 'SG'], cost: 2,
+    SC: 76, FIN: 70, MID: 74, THREE: 72, DRV: 72, BH: 76, ISO: 74, PM: 74, PASS: 76, OFF: 66,
+    GRV: 64, PD: 68, ID: 56, RIM: 50, REB: 58, ATH: 74, USG: 70, LEAD: 64
+  },
+  {
+    id: 'jalen_green2023', name: '杰伦·格林', year: 2023, team: '休斯顿火箭', positions: ['SG'], cost: 2,
+    SC: 80, FIN: 76, MID: 72, THREE: 74, DRV: 80, BH: 74, ISO: 76, PM: 58, PASS: 60, OFF: 68,
+    GRV: 64, PD: 62, ID: 50, RIM: 45, REB: 52, ATH: 82, USG: 74, LEAD: 55
+  },
+  {
+    id: 'sengun2023', name: '阿尔佩伦·申京', year: 2023, team: '休斯顿火箭', positions: ['C', 'PF'], cost: 2,
+    SC: 74, FIN: 76, MID: 68, THREE: 30, DRV: 66, BH: 68, ISO: 66, PM: 64, PASS: 66, OFF: 60,
+    GRV: 58, PD: 62, ID: 72, RIM: 76, REB: 80, ATH: 68, USG: 62, LEAD: 58
+  },
+  {
+    id: 'holmgren2023', name: '切特·霍姆格伦', year: 2023, team: '俄克拉荷马雷霆', positions: ['C', 'PF'], cost: 2,
+    SC: 72, FIN: 70, MID: 72, THREE: 74, DRV: 62, BH: 60, ISO: 64, PM: 56, PASS: 58, OFF: 68,
+    GRV: 62, PD: 72, ID: 80, RIM: 82, REB: 76, ATH: 74, USG: 58, LEAD: 56
+  },
+  {
+    id: 'wendell_carter2022', name: '小温德尔·卡特', year: 2022, team: '奥兰多魔术', positions: ['C', 'PF'], cost: 2,
+    SC: 72, FIN: 74, MID: 68, THREE: 66, DRV: 62, BH: 58, ISO: 62, PM: 54, PASS: 56, OFF: 66,
+    GRV: 60, PD: 68, ID: 76, RIM: 80, REB: 82, ATH: 70, USG: 58, LEAD: 56
+  },
+  {
+    id: 'vucevic2019', name: '尼古拉·武切维奇', year: 2019, team: '奥兰多魔术', positions: ['C'], cost: 2,
+    SC: 76, FIN: 72, MID: 70, THREE: 72, DRV: 60, BH: 56, ISO: 62, PM: 56, PASS: 58, OFF: 66,
+    GRV: 60, PD: 58, ID: 72, RIM: 76, REB: 82, ATH: 66, USG: 60, LEAD: 56
+  },
+  {
+    id: 'drummond2016', name: '安德烈·德拉蒙德', year: 2016, team: '底特律活塞', positions: ['C'], cost: 2,
+    SC: 62, FIN: 78, MID: 30, THREE: 20, DRV: 52, BH: 42, ISO: 48, PM: 38, PASS: 40, OFF: 56,
+    GRV: 48, PD: 56, ID: 80, RIM: 84, REB: 90, ATH: 76, USG: 50, LEAD: 48
+  },
+  {
+    id: 'whiteside2016', name: '哈桑·怀特塞德', year: 2016, team: '迈阿密热火', positions: ['C'], cost: 2,
+    SC: 64, FIN: 76, MID: 35, THREE: 25, DRV: 50, BH: 42, ISO: 50, PM: 38, PASS: 40, OFF: 58,
+    GRV: 48, PD: 56, ID: 82, RIM: 88, REB: 92, ATH: 74, USG: 50, LEAD: 48
+  },
+  {
+    id: 'howard2011', name: '德怀特·霍华德', year: 2011, team: '奥兰多魔术', positions: ['C'], cost: 2,
+    SC: 66, FIN: 80, MID: 30, THREE: 20, DRV: 54, BH: 44, ISO: 50, PM: 40, PASS: 42, OFF: 58,
+    GRV: 50, PD: 60, ID: 86, RIM: 90, REB: 94, ATH: 80, USG: 52, LEAD: 52
+  },
+  {
+    id: 'rondo2012', name: '拉简·隆多', year: 2012, team: '波士顿凯尔特人', positions: ['PG'], cost: 2,
+    SC: 68, FIN: 66, MID: 62, THREE: 52, DRV: 70, BH: 76, ISO: 62, PM: 84, PASS: 86, OFF: 60,
+    GRV: 54, PD: 80, ID: 52, RIM: 46, REB: 56, ATH: 74, USG: 60, LEAD: 72
+  },
+  {
+    id: 'dragic2014', name: '戈兰·德拉季奇', year: 2014, team: '菲尼克斯太阳', positions: ['PG', 'SG'], cost: 2,
+    SC: 76, FIN: 70, MID: 74, THREE: 72, DRV: 72, BH: 72, ISO: 70, PM: 72, PASS: 74, OFF: 66,
+    GRV: 62, PD: 68, ID: 52, RIM: 46, REB: 54, ATH: 72, USG: 68, LEAD: 64
   }
 ];
